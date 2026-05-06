@@ -1,0 +1,91 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+<title>Responsive Page</title> 
+<style> 
+body{ 
+ margin:0; 
+ font-family:Arial; 
+ background-color:white; 
+} 
+header{ 
+ background-color:blue; 
+ color:white; 
+ text-align:center; 
+ padding:15px; 
+} 
+nav{ 
+ background-color:black; 
+ text-align:center; 
+ padding:10px; 
+} 
+nav a{ 
+ color:white; 
+ text-decoration:none; 
+ margin:10px; 
+} 
+section{ 
+ column-count:2; 
+ padding:15px; 
+} 
+.card{ 
+ background-color:lightgray; 
+ margin:10px;
+padding:10px; 
+ border:1px solid gray; 
+} 
+@keyframes change{ 
+ from{background-color:lightyellow;} 
+ to{background-color:lightgreen;} 
+} 
+.animate{ 
+ animation:change 3s infinite; 
+} 
+.card:hover{ 
+ transform:scale(1.05); 
+} 
+@media screen and (max-width:600px){ 
+ section{ 
+ column-count:1; 
+ } 
+} 
+footer{ 
+ background-color:blue; 
+ color:white; 
+ text-align:center; 
+ padding:10px; 
+} 
+</style> 
+</head> 
+<body> 
+<header> 
+<h1>Responsive Webpage</h1> 
+</header> 
+<nav> 
+<a href="#">Home</a> 
+<a href="#">About</a> 
+<a href="#">Contact</a> 
+</nav> 
+<section>
+<div class="card animate"> 
+<h3>⭐ Column Layout</h3> 
+<p>Content is arranged in multiple columns.</p> 
+</div> 
+<div class="card"> 
+<h3>🎨 Simple Design</h3> 
+<p>Using basic fonts and color names.</p> 
+</div> 
+<div class="card"> 
+<h3>⚙ Animation</h3> 
+<p>Background changes using animation.</p> 
+</div> 
+<div class="card"> 
+<h3>🔄 Transform</h3> 
+<p>Hover to see scaling effect.</p> 
+</div> 
+</section> 
+<footer> 
+<p>Simple CSS3 Responsive Design</p> 
+</footer> 
+</body> 
+</html>
