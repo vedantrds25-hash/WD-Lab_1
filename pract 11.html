@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML5 APIs Demo</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
+  margin: 0;
+  padding: 20px;
+}
+
+h2 {
+  color: #333;
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Boxes */
+.box {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  flex: 1 1 300px;
+}
+
+/* Drag & Drop */
+#dragItem {
+  width: 100px;
+  padding: 10px;
+  background: #4CAF50;
+  color: white;
+  text-align: center;
+  cursor: grab;
+}
+
+#dropZone {
+  width: 100%;
+  height: 150px;
+  border: 2px dashed #999;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Buttons */
+button {
+  padding: 8px 12px;
+  margin-top: 10px;
+  border: none;
+  background: #007BFF;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+input {
+  padding: 6px;
+  margin-top: 10px;
+  width: 100%;
+}
+</style>
+</head>
+
+<body>
+
+<h1>HTML5 APIs Demo</h1>
+
+<div class="container">
+
+  <!-- Drag & Drop -->
+  <div class="box">
+    <h2>🖱 Drag & Drop</h2>
+    <div id="dragItem" draggable="true">Drag me</div>
+    <div id="dropZone">Drop here</div>
+  </div>
+
+  <!-- Geolocation -->
+  <div class="box">
+    <h2>📍 Geolocation</h2>
+    <button onclick="getLocation()">Get Location</button>
+    <p id="locationOutput">Click button to get location</p>
+  </div>
+
+  <!-- Web Storage -->
+  <div class="box">
+    <h2>💾 Web Storage</h2>
+    <input type="text" id="dataInput" placeholder="Enter something...">
+    <button onclick="saveData()">Save</button>
+    <button onclick="loadData()">Load</button>
+    <p id="storageOutput"></p>
+  </div>
+
+</div>
+
+<script>
+// Drag & Drop
+const dragItem = document.getElementById("dragItem");
+const dropZone = document.getElementById("dropZone");
+
+dragItem.addEventListener("dragstart", (e) => {
+  e.dataTransfer.setData("text", e.target.id);
+});
+
+dropZone.addEventListener("dragover", (e) => {
+  e.preventDefault();
+});
+
+dropZone.addEventListener("drop", (e) => {
+  e.preventDefault();
+  const data = e.dataTransfer.getData("text");
+  dropZone.appendChild(document.getElementById(data));
+});
+
+// Geolocation
+function getLocation() {
+  const output = document.getElementById("locationOutput");
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        output.innerHTML = 
+          "Latitude: " + position.coords.latitude +
+          "<br>Longitude: " + position.coords.longitude;
+      },
+      () => {
+        output.innerHTML = "Unable to retrieve location.";
+      }
+    );
+  } else {
+    output.innerHTML = "Geolocation not supported.";
+  }
+}
+
+// Web Storage
+function saveData() {
+  const data = document.getElementById("dataInput").value;
+  localStorage.setItem("myData", data);
+  alert("Data saved!");
+}
+
+function loadData() {
+  const data = localStorage.getItem("myData");
+  document.getElementById("storageOutput").innerText = 
+    data ? "Stored Data: " + data : "No data found";
+}
+</script>
+
+</body>
+</html>
